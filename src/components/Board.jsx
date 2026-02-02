@@ -10,7 +10,7 @@ const BoardView = () => {
 
   // Touch state
   const [touchStart, setTouchStart] = useState({ x: 0, y: 0 });
-  const [touchEnd, setTouchEnd] = useState({ x: 0, y: 0 });
+
 
   // Handle keyboard inputs
   const handleKeyDown = (event) => {
@@ -76,7 +76,7 @@ const BoardView = () => {
 
     // Reset values
     setTouchStart({ x: 0, y: 0 });
-    setTouchEnd({ x: 0, y: 0 });
+
   };
 
   useEvent("keydown", handleKeyDown);
