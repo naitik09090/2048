@@ -46,7 +46,7 @@ body::before {
 h1 {
   font-size: 60px;
   font-weight: 800;
-  margin-bottom: 10px;
+  margin-bottom: 0px; /* Removed margin completely */
   text-shadow: 0 0 30px rgba(255, 255, 255, 0.5),
                0 0 60px rgba(255, 255, 255, 0.3);
   letter-spacing: 8px;
@@ -69,7 +69,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 10px;
   position: relative;
   z-index: 1;
   width: 100%;
@@ -88,8 +88,9 @@ h1 {
     0 8px 32px 0 rgba(31, 38, 135, 0.37),
     inset 0 0 0 1px rgba(255, 255, 255, 0.18);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  margin-top: 10px;
+  margin-top: 5px; /* Minimal top margin */
   transition: transform 0.3s ease;
+  transform-origin: top center; /* Shrink upwards to keep close to title */
   
   /* Responsive scaling */
   @media (max-height: 800px) {
