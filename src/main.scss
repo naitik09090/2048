@@ -6,10 +6,17 @@
   box-sizing: border-box;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* This prevents scrolling */
+}
+
 body {
   display: flex;
-  min-height: 100vh;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background: linear-gradient(-45deg, #ee7752, #943ce7, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   color: white;
@@ -19,7 +26,6 @@ body {
   align-items: center;
   font-family: "Poppins", sans-serif;
   font-size: 18px;
-  overflow-x: hidden;
   position: relative;
 }
 
@@ -29,7 +35,6 @@ body::before {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
   background: 
     radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
@@ -73,7 +78,6 @@ h1 {
   position: relative;
   z-index: 1;
   width: 100%;
-  min-height: 100vh;
   overflow: hidden;
 }
 
@@ -106,10 +110,14 @@ h1 {
   }
 }
 
+.title {
+  padding-top: 100px;
+}
+
 .board {
   position: relative;
   width: 455px;
-  height: 455px;
+  height: auto;
   padding: 5px;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
