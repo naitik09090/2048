@@ -5,13 +5,17 @@ import "./main.scss";
 import "./styles.scss";
 
 const App = () => {
-  return <BoardView />;
+  return (
+    <div className="app-wrapper">
+      <h1 className="title">2048</h1>
+      <BoardView />
+    </div>
+  );
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <div className="app-wrapper">
-    <h1>2048</h1>
+  <React.StrictMode>
     <App />
-  </div>
+  </React.StrictMode>
 );
