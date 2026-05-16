@@ -112,9 +112,7 @@ const BoardView = () => {
       onTouchEnd={handleTouchEnd}
     >
       <div className="details-box">
-        <div>
-          <h1>2048</h1>
-        </div>
+        <h1>2048</h1>
         <div className="resetButton" onClick={resetGame}>
           New Game
         </div>
