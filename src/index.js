@@ -7,7 +7,6 @@ import "./styles.scss";
 const App = () => {
   return (
     <div className="app-wrapper">
-      <h1 className="title">2048</h1>
       <BoardView />
     </div>
   );

@@ -87,7 +87,7 @@ const BoardView = () => {
 
   const cells = board.cells.map((row, rowIndex) => {
     return (
-      <div key={rowIndex}>
+      <div key={rowIndex} className="board-row">
         {row.map((col, colIndex) => {
           return <Cell key={rowIndex * board.size + colIndex} />;
         })}
@@ -112,6 +112,9 @@ const BoardView = () => {
       onTouchEnd={handleTouchEnd}
     >
       <div className="details-box">
+        <div>
+          <h1>2048</h1>
+        </div>
         <div className="resetButton" onClick={resetGame}>
           New Game
         </div>
