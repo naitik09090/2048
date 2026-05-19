@@ -4,41 +4,6 @@ const path = require('path');
 const buildDir = path.join(__dirname, 'build');
 let html = fs.readFileSync(path.join(buildDir, 'index.html'), 'utf8');
 
-// Inject protection scripts to secure the HTML/JS code (disable right-click, keyboard shortcuts, F12, developer console debugging)
-const securityScript = `
-  <script>
-    // Disable right click context menu to prevent inspecting elements
-    document.addEventListener('contextmenu', event => event.preventDefault());
-
-    // Disable F12 and keyboard shortcuts for developer tools
-    document.addEventListener('keydown', event => {
-      // F12 (123)
-      if (event.keyCode === 123) {
-        event.preventDefault();
-        return false;
-      }
-      // Ctrl+Shift+I (73), Ctrl+Shift+J (74), Ctrl+Shift+C (67)
-      if (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74 || event.keyCode === 67)) {
-        event.preventDefault();
-        return false;
-      }
-      // Ctrl+U (85) - View Source
-      if (event.ctrlKey && event.keyCode === 85) {
-        event.preventDefault();
-        return false;
-      }
-    });
-
-    // Anti-DevTools Debugger Loop to freeze console if F12/Inspect is opened by other means
-    setInterval(function() {
-      try {
-        (function() {}).constructor('debugger')();
-      } catch (e) {}
-    }, 100);
-  </script>
-`;
-html = html.replace('<head>', '<head>' + securityScript);
-
 // Find and inline CSS
 const cssDir = path.join(buildDir, 'static', 'css');
 if (fs.existsSync(cssDir)) {
@@ -121,8 +86,8 @@ if (fs.existsSync(jsDir)) {
     jsContent = jsContent.replace(/<\/script>/g, '<\\/script>');
     // Remove the original script tag
     html = html.replace(/<script defer="defer" src="[^"]+\.js"><\/script>/, '');
-    // Append the inline script before closing body tag
-    html = html.replace('</body>', `<script>${jsContent}</script></body>`);
+    // Append the inline script before closing body tag, and make it self-deleting to hide the source code from the Elements tab
+    html = html.replace('</body>', `<script>document.currentScript.remove();${jsContent}</script></body>`);
   }
 }
 
