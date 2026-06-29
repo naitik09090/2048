@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Tile from "./Tile";
 import Cell from "./Cell";
 import { Board } from "../helper";
 import useEvent from "../hooks/useEvent";
 import GameOverlay from "./GameOverlay";
+import {
+  playSlideSound,
+  playMergeSound,
+  playWinSound,
+  playLoseSound,
+  playStartSound
+} from "../utils/sound";
 
 const BoardView = () => {
   const [board, setBoard] = useState(new Board());
+
+  useEffect(() => {
+    // Play start chime on load
+    playStartSound();
+  }, []);
 
   // Touch state
   const [touchStart, setTouchStart] = useState({ x: 0, y: 0 });
@@ -29,8 +41,24 @@ const BoardView = () => {
       Object.create(Object.getPrototypeOf(board)),
       board
     );
+    let oldScore = board.score;
+    let oldWon = board.won;
+    let oldLost = board.hasLost();
+
     let newBoard = boardClone.move(direction);
     setBoard(newBoard);
+
+    if (newBoard.hasChanged) {
+      if (newBoard.won && !oldWon) {
+        playWinSound();
+      } else if (newBoard.hasLost() && !oldLost) {
+        playLoseSound();
+      } else if (newBoard.score > oldScore) {
+        playMergeSound();
+      } else {
+        playSlideSound();
+      }
+    }
   };
 
   // Handle touch start
@@ -103,6 +131,7 @@ const BoardView = () => {
 
   const resetGame = () => {
     setBoard(new Board());
+    playStartSound();
   };
 
   return (

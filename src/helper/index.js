@@ -146,6 +146,7 @@ class Board {
       this.addRandomTile();
     }
     this.setPositions();
+    this.hasChanged = hasChanged;
     return this;
   }
   clearOldTiles() {

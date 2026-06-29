@@ -6,7 +6,7 @@
   box-sizing: border-box;
 }
 
-html, body {
+html, body, #root {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -28,6 +28,11 @@ body {
   font-size: 18px;
   position: relative;
   touch-action: none; /* Disable browser handling of gestures */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body::before {
@@ -79,6 +84,7 @@ h1 {
   position: relative;
   z-index: 1;
   width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -95,7 +101,7 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.2);
   margin-top: 5px; /* Minimal top margin */
   transition: transform 0.3s ease;
-  transform-origin: top center; /* Shrink upwards to keep close to title */
+  transform-origin: center center; /* Scale from the center to maintain perfect alignment */
   
   /* Responsive scaling */
   @media (max-height: 800px) {
